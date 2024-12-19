@@ -196,5 +196,5 @@ class Predictor(BasePredictor):
         self.comfyUI.run_workflow(workflow)
 
         return optimise_images.optimise_image_files(
-            output_format, output_quality, self.comfyUI.get_files(COMFYUI_TEMP_OUTPUT_DIR)
+            output_format, output_quality, self.comfyUI.get_files(OUTPUT_DIR, file_extensions=['png','jpg'])
         )
