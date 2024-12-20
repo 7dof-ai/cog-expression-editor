@@ -13,11 +13,6 @@ RUN apt-get update && apt-get upgrade -y && \
     openssh-server && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
-
-# Copy application code
-COPY . /app/
-
 # Install Python dependencies
 RUN pip3 install --no-cache-dir \
     torch \
@@ -54,6 +49,13 @@ RUN pip3 install --no-cache-dir \
 # Install pget
 RUN curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.8.1/pget_linux_x86_64" && \
     chmod +x /usr/local/bin/pget
+
+RUN mkdir -p /app
+# Copy application code
+COPY . /app/
+
+WORKDIR /app
+
 
 # Install custom nodes
 RUN python3 scripts/install_custom_nodes.py
