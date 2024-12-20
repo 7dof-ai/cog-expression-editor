@@ -58,7 +58,9 @@ COPY . /app/
 
 WORKDIR /app
 
-
+# Install ComfyUI
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
+    cd ComfyUI && git checkout 9f4b181
 # Install custom nodes
 RUN mkdir -p ComfyUI/custom_nodes && \
     cd ComfyUI/custom_nodes && \
