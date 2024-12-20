@@ -1,22 +1,65 @@
-ARG COG_VERSION=ae0284a388b68230ff70bd35f8b75013a897e2b7a0f2bd654bf3b1ba7e173285
+FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04
 
-FROM r8.im/7dof-ai/expression-editor@sha256:${COG_VERSION}
-
-# Install necessary packages and Python 3.10
+# Install system dependencies
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends software-properties-common curl git openssh-server && \
-    add-apt-repository ppa:deadsnakes/ppa -y && \
-    apt-get update && apt-get install -y --no-install-recommends python3.10 python3.10-dev python3.10-distutils && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1 &&\
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python3 get-pip.py
+    apt-get install -y --no-install-recommends \
+    software-properties-common \
+    python3.10 \
+    python3.10-dev \
+    python3-pip \
+    ffmpeg \
+    curl \
+    git \
+    openssh-server && \
+    rm -rf /var/lib/apt/lists/*
 
-# Create a virtual environment
-RUN python3 -m venv /opt/venv
+WORKDIR /app
 
-# Install runpod within the virtual environment
-RUN /opt/venv/bin/pip install runpod
+# Copy application code
+COPY . /app/
 
-ADD handler.py /rp_handler.py
+# Install Python dependencies
+RUN pip3 install --no-cache-dir \
+    torch \
+    torchvision \
+    torchaudio \
+    torchsde \
+    einops \
+    transformers>=4.28.1 \
+    tokenizers>=0.13.3 \
+    sentencepiece \
+    safetensors>=0.3.0 \
+    aiohttp \
+    accelerate \
+    pyyaml \
+    Pillow \
+    scipy \
+    tqdm \
+    psutil \
+    spandrel \
+    soundfile \
+    kornia>=0.7.1 \
+    websocket-client==1.6.3 \
+    albumentations==1.4.3 \
+    numpy>=1.26.4 \
+    opencv-python-headless \
+    imageio-ffmpeg>=0.5.1 \
+    lmdb>=1.4.1 \
+    rich>=13.7.1 \
+    ultralytics \
+    tyro==0.8.5 \
+    dill \
+    runpod
 
-CMD ["/opt/venv/bin/python3", "-u", "/rp_handler.py"]
+# Install pget
+RUN curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.8.1/pget_linux_x86_64" && \
+    chmod +x /usr/local/bin/pget
+
+# Install custom nodes
+RUN python3 scripts/install_custom_nodes.py
+
+# Copy handler
+COPY handler.py /rp_handler.py
+
+# Set the entrypoint
+CMD ["python3", "-u", "/rp_handler.py"]
