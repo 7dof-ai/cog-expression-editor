@@ -11,7 +11,8 @@ RUN apt-get update && apt-get upgrade -y && \
     curl \
     git \
     openssh-server && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    ln -sf /usr/bin/python3 /usr/bin/python
 
 # Install Python dependencies
 RUN pip3 install --no-cache-dir \
@@ -44,6 +45,7 @@ RUN pip3 install --no-cache-dir \
     ultralytics \
     tyro==0.8.5 \
     dill \
+    cog \
     runpod
 
 # Install pget
