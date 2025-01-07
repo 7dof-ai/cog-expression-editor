@@ -14,6 +14,7 @@
       "woo": 0,
       "smile": 0,
       "src_ratio": 1,
+      "pose_src_ratio": 1,
       "sample_ratio": 1,
       "sample_parts": "OnlyExpression",
       "crop_factor": 1.7000000000000002,
