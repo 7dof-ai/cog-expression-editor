@@ -70,6 +70,7 @@ class Predictor(BasePredictor):
         expression_editor["woo"] = kwargs["woo"]
         expression_editor["smile"] = kwargs["smile"]
         expression_editor["src_ratio"] = kwargs["src_ratio"]
+        expression_editor["pose_src_ratio"] = kwargs["pose_src_ratio"]
         expression_editor["sample_ratio"] = kwargs["sample_ratio"]
         expression_editor["crop_factor"] = kwargs["crop_factor"]
 
@@ -152,6 +153,7 @@ class Predictor(BasePredictor):
             description="Smile: Adjusts the degree of smiling",
         ),
         src_ratio: float = Input(default=1, ge=0, le=1, description="Source ratio"),
+        pose_src_ratio: float = Input(default=1, ge=0, le=1, description="Pose source ratio"),
         sample_ratio: float = Input(
             default=1, ge=-0.2, le=1.2, description="Sample ratio"
         ),
@@ -189,6 +191,7 @@ class Predictor(BasePredictor):
             woo=woo,
             smile=smile,
             src_ratio=src_ratio,
+            pose_src_ratio=pose_src_ratio,
             sample_ratio=sample_ratio,
             crop_factor=crop_factor,
         )
