@@ -82,20 +82,20 @@ class Predictor(BasePredictor):
         ),
         rotate_pitch: float = Input(
             default=0,
-            ge=-20,
-            le=20,
+            ge=-30,
+            le=30,
             description="Rotation pitch: Adjusts the up and down tilt of the face",
         ),
         rotate_yaw: float = Input(
             default=0,
-            ge=-20,
-            le=20,
+            ge=-40,
+            le=40,
             description="Rotation yaw: Adjusts the left and right turn of the face",
         ),
         rotate_roll: float = Input(
             default=0,
-            ge=-20,
-            le=20,
+            ge=-30,
+            le=30,
             description="Rotation roll: Adjusts the tilt of the face to the left or right",
         ),
         blink: float = Input(
@@ -106,8 +106,8 @@ class Predictor(BasePredictor):
         ),
         eyebrow: float = Input(
             default=0,
-            ge=-10,
-            le=15,
+            ge=-40,
+            le=30,
             description="Eyebrow: Adjusts the height and shape of the eyebrows",
         ),
         wink: float = Input(
@@ -148,8 +148,8 @@ class Predictor(BasePredictor):
         ),
         smile: float = Input(
             default=0,
-            ge=-0.3,
-            le=1.3,
+            ge=-0.6,
+            le=2.0,
             description="Smile: Adjusts the degree of smiling",
         ),
         src_ratio: float = Input(default=1, ge=0, le=1, description="Source ratio"),
