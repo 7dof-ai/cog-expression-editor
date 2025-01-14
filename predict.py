@@ -101,7 +101,7 @@ class Predictor(BasePredictor):
         blink: float = Input(
             default=0,
             ge=-20,
-            le=5,
+            le=10,
             description="Blink: Controls the degree of eye closure",
         ),
         eyebrow: float = Input(
