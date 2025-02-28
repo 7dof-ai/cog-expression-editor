@@ -34,6 +34,7 @@ class Predictor(BasePredictor):
             workflow,
             weights_to_download=[
                 "face_yolov8n.pt",
+                "segm/person_yolov8m-seg.pt",
                 "appearance_feature_extractor.safetensors",
                 "motion_extractor.safetensors",
                 "spade_generator.safetensors",

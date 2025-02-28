@@ -66,7 +66,7 @@ RUN mkdir -p ComfyUI/custom_nodes && \
     cd ComfyUI/custom_nodes && \
     git clone --recursive https://github.com/kyzyx/ComfyUI-AdvancedLivePortrait && \
     cd ComfyUI-AdvancedLivePortrait && \
-    git checkout 8599533 && \
+    git checkout e6e897f && \
     git submodule update --init --recursive
 
 # Copy handler

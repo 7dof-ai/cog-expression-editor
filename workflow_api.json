@@ -46,13 +46,29 @@
     "inputs": {
       "filename_prefix": "ComfyUI",
       "images": [
-        "14",
+        "18",
         0
       ]
     },
     "class_type": "SaveImage",
     "_meta": {
       "title": "Save Image"
+    }
+  },
+  "18": {
+    "inputs": {
+      "image": [
+        "14",
+        0
+      ],
+      "alpha": [
+        "14",
+        1
+      ]
+    },
+    "class_type": "JoinImageWithAlpha",
+    "_meta": {
+      "title": "Join Image with Alpha"
     }
   }
 }
